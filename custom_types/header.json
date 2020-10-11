@@ -1,0 +1,26 @@
+{
+  "Main" : {
+    "document_title" : {
+      "type" : "StructuredText",
+      "config" : {
+        "single" : "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label" : "Document Title"
+      }
+    },
+    "navigation" : {
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "link" : {
+            "type" : "Link",
+            "config" : {
+              "allowTargetBlank" : true,
+              "label" : "Link"
+            }
+          }
+        },
+        "label" : "Navigation"
+      }
+    }
+  }
+}

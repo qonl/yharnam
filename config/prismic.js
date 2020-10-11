@@ -1,8 +1,12 @@
 export const PRISMIC_CONFIG = {
-    REPO: '',
-    API_URL: '',
+    REPO: process.env.NEXT_PUBLIC_PRISMIC_REPO,
+    API_URL: `https://${ process.env.NEXT_PUBLIC_PRISMIC_REPO }.cdn.prismic.io/api/v2`,
     DOC_TYPES: {
-        // Add doc types...
+        HOMEPAGE: 'homepage',
+        PAGE: 'page',
+        PRODUCT: 'product',
+        HEADER: 'header',
+        FOOTER: 'footer',
     },
 }
 
