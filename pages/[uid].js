@@ -28,7 +28,7 @@ export async function getStaticPaths() {
     const documents = await getRepeatableDocuments(doc => doc.type === PAGE)
     return {
         paths: documents.map(doc => `/${ doc.uid }`),
-        fallback: true,
+        fallback: false,
     }
 }
 
