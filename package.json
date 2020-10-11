@@ -1,0 +1,22 @@
+{
+  "name": "next-prismic-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
+  },
+  "dependencies": {
+    "next": "9.5.0",
+    "prismic-javascript": "^3.0.1",
+    "prismic-reactjs": "^1.3.3",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "swr": "^0.3.5"
+  },
+  "devDependencies": {
+    "prismic-dom": "^2.2.4"
+  }
+}
