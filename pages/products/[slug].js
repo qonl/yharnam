@@ -1,6 +1,5 @@
 import React from 'react';
-import { getBySlug, getRepeatableDocuments } from '../../lib/api';
-import { PRISMIC_CONFIG } from '../../config/prismic';
+import { getBySlug } from '../../lib/api';
 
 
 const Product = ({ params }) => {
@@ -23,15 +22,6 @@ export async function getStaticProps({ params, preview = null, previewData = {} 
             preview,
             product,
         }
-    }
-}
-
-export async function getStaticPaths() {
-    const { PRODUCT } = PRISMIC_CONFIG.DOC_TYPES;
-    const products = await getRepeatableDocuments(doc => doc.type === PRODUCT);
-    return {
-        paths: products.map(doc => `/products/${ doc.uid }`),
-        fallback: false,
     }
 }
 
