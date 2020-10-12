@@ -10,7 +10,7 @@ const Product = ({ params }) => {
     );
 }
 
-export async function getStaticProps({ params, preview = null, previewData = {} }) {
+export async function getServerSideProps({ params, preview = null, previewData = {} }) {
     const { ref } = previewData;
     const { slug } = params;
 
