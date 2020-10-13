@@ -1,6 +1,6 @@
 # Yharnam
 
-🌘 [WIP] This is a Nextjs v9.5.0 starter project with Prismic & Shopify (enabled via Prismic integration fields). 
+🌘 [WIP] This is a Nextjs v9.5.4 starter project with Prismic & Shopify (enabled via Prismic integration fields). 
 
 ## Getting Started
 
