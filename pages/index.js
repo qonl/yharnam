@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGetProducts } from '../actions';
-import {  PRISMIC_CONFIG } from '../config/prismic';
+import { hrefResolver, linkResolver, PRISMIC_CONFIG } from '../config/prismic';
 import { getByType, getByIds } from '../lib/api';
 import { prismicPageData } from '../util/prismicHelpers';
 import { RichText } from 'prismic-reactjs';
@@ -18,7 +18,7 @@ const Home = ({ products: initialData, page }) => {
             const { data } = item;
             return (
                 <div key={ data.item.id } className="product">
-                    <Link href="/products/[slug]" as={ `/products/${ item.uid }` }>
+                    <Link href={ hrefResolver(item) } as={ linkResolver(item) }>
                         <a>
                             <h1>{ data.item.title }</h1>
                         </a>

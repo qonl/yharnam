@@ -12,12 +12,11 @@ export const PRISMIC_CONFIG = {
 
 export const linkResolver = doc => {
     const { HOMEPAGE, PAGE, PRODUCT } = PRISMIC_CONFIG.DOC_TYPES;
-
-    switch(doc.type) {
+    switch(true) {
         case doc.type === PAGE:
             return `/${ doc.uid }`;
         case doc.type === PRODUCT:
-            return `/products/${ doc.uid }`;
+            return `/product/${ doc.uid }`;
         // Add case for each page
         default:
             return '/';
@@ -27,12 +26,11 @@ export const linkResolver = doc => {
 // Additional helper function for Next/Link component
 export const hrefResolver = doc => {
     const { HOMEPAGE, PAGE, PRODUCT } = PRISMIC_CONFIG.DOC_TYPES;
-
-    switch(doc.type) {
+    switch(true) {
         case doc.type === PAGE:
             return `/[uid]`;
         case doc.type === PRODUCT:
-            return `/products/[slug]`;
+            return `/product/[slug]`;
         default:
             return '/';
     }

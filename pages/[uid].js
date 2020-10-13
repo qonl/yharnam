@@ -1,35 +1,36 @@
 import React from 'react'
 import { getRepeatableDocuments } from '../lib/api';
-import { client } from '../lib/client';
 import { PRISMIC_CONFIG } from '../config/prismic';
+import { getBySlug } from '../lib/api';
 
-const Page = () => {
-    return <h1>This is a page template</h1>
-}
+const Page = () => <h1>This is a page template</h1>;
 
 
 export async function getStaticProps({ params, preview = null, previewData = {} }) {
-    const { ref } = previewData;
-    const { PAGE } = PRISMIC_CONFIG.DOC_TYPES;
-
-    const document = await client.getByUID(PAGE, params.uid, ref ? { ref } : null) || {};
-
-    return {
-        props: {
-            params,
-            preview,
-            document,
+    try {
+        const { PAGE } = PRISMIC_CONFIG.DOC_TYPES;
+        const { ref } = previewData;
+        const { slug } = params;
+        const document = await getBySlug(PAGE, slug, ref);
+        return {
+            props: {
+                params,
+                preview,
+                document,
+            }
         }
+    } catch(error) {
+        throw new Error(error);
     }
 }
 
 export async function getStaticPaths() {
     const { PAGE } = PRISMIC_CONFIG.DOC_TYPES;
-    const documents = await getRepeatableDocuments(doc => doc.type === PAGE)
+    const documents = await getRepeatableDocuments(doc => doc.type === PAGE);
     return {
-        paths: documents.map(doc => `/${ doc.uid }`),
+        paths: documents?.map(doc => ({ params: { slug: doc.uid }})),
         fallback: false,
     }
 }
 
-export default Page
+export default Page;
