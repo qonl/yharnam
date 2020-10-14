@@ -1,18 +1,40 @@
 import App from 'next/app'
 import React from 'react';
-import Layout from '@components/layout/Layout';
+import { getByType } from '../lib/api';
+import { PRISMIC_CONFIG } from '../config/prismic';
 
-function MyApp({ Component, pageProps }) {
+// Create a context for the layout, as to not
+// fetch this information on every page change
+export const LayoutContext = React.createContext();
+const LayoutProvider = LayoutContext.Provider;
+
+function MyApp({ Component, pageProps, header, footer }) {
     return (
-        <Layout>
+        <LayoutProvider value={{ header, footer }}>
             <Component { ...pageProps } />
-        </Layout>
+        </LayoutProvider>
     );
 }
 
 MyApp.getInitialProps = async appContext => {
-    const appProps = await App.getInitialProps(appContext);
-    return { ...appProps }
+    try {
+        const { HEADER, FOOTER } = PRISMIC_CONFIG.DOC_TYPES;
+
+        const appProps = await Promise.all([
+            App.getInitialProps(appContext),
+            getByType(HEADER),
+            getByType(FOOTER),
+        ]);
+
+        return {
+            ...appProps,
+            // TODO: need to find a better way to extract these
+            header: appProps[1],
+            footer: appProps[2],
+        };
+    } catch(error) {
+        throw new Error(error);
+    }
 }
 
 export default MyApp;

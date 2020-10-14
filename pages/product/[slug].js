@@ -1,6 +1,7 @@
 import React from 'react';
 import { getBySlug, getRepeatableDocuments } from '../../lib/api';
 import { PRISMIC_CONFIG } from '../../config/prismic';
+import withLayout from '@components/layout/Layout';
 
 const Product = ({ product, preview }) => {
     return (
@@ -31,12 +32,16 @@ export async function getStaticProps({ params, preview = false, previewData = {}
 }
 
 export async function getStaticPaths() {
-    const { PRODUCT } = PRISMIC_CONFIG.DOC_TYPES;
-    const products = await getRepeatableDocuments(doc => doc.type === PRODUCT);
-    return {
-        paths: products?.map(p => ({ params: { slug: p.uid }})),
-        fallback: false,
+    try {
+        const { PRODUCT } = PRISMIC_CONFIG.DOC_TYPES;
+        const products = await getRepeatableDocuments(doc => doc.type === PRODUCT);
+        return {
+            paths: products?.map(p => ({ params: { slug: p.uid }})),
+            fallback: false,
+        }
+    } catch(error) {
+        throw new Error(error);
     }
 }
 
-export default Product;
+export default withLayout(Product);
