@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 This project is set up specifically to run on Netlify, so you need netlify cli tools
 
-`npm i netlify-cli --save`
+`npm i netlify-cli --g`
 
 Set up your netlify environment variables (`.env.local` for development):
 ```bash
