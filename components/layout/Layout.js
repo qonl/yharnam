@@ -5,7 +5,7 @@ import { LayoutContext } from '../../pages/_app';
 
 /**
  * Wraps the page component with Global header and footer
- * @param {func} Component - the page component
+ * @param {function} Component - the page component
  * @returns {function(*): JSX.Element}
  * @constructor
  */
