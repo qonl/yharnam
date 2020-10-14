@@ -3,6 +3,11 @@ import { PRISMIC_CONFIG } from '../../config/prismic';
 
 const API_URL = PRISMIC_CONFIG.API_URL;
 
+/**
+ * Generate the prismic script required for previews
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PrismicScript = () => {
     const [, repoName] = API_URL.match(/https?:\/\/([^.]+)?\.(cdn\.)?.+/);
 

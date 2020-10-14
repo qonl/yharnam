@@ -19,6 +19,7 @@ export const linkResolver = doc => {
             return `/product/${ doc.uid }`;
         // Add case for each page
         default:
+            // Default to homepage
             return '/';
     }
 }
@@ -32,6 +33,7 @@ export const hrefResolver = doc => {
         case doc.type === PRODUCT:
             return `/product/[slug]`;
         default:
+            // Default to homepage
             return '/';
     }
 }

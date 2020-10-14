@@ -3,8 +3,20 @@ import Header from './Header';
 import Footer from './Footer';
 import { LayoutContext } from '../../pages/_app';
 
+/**
+ * Wraps the page component with Global header and footer
+ * @param {func} Component - the page component
+ * @returns {function(*): JSX.Element}
+ * @constructor
+ */
 const Layout = Component => {
-    const L = props => {
+    /**
+     * Wrapper for the page component
+     * @param {object} props - page props
+     * @returns {JSX.Element}
+     * @constructor
+     */
+    const Page = props => {
         const { header, footer } = useContext(LayoutContext);
         return (
             <div className="layout">
@@ -17,7 +29,7 @@ const Layout = Component => {
         )
     }
 
-    return L;
+    return Page;
 }
 
 export default Layout;
