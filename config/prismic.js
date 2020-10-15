@@ -7,16 +7,19 @@ export const PRISMIC_CONFIG = {
         PRODUCT: 'product',
         HEADER: 'header',
         FOOTER: 'footer',
+        POST: 'post',
     },
 }
 
 export const linkResolver = doc => {
-    const { HOMEPAGE, PAGE, PRODUCT } = PRISMIC_CONFIG.DOC_TYPES;
+    const { HOMEPAGE, PAGE, PRODUCT, POST } = PRISMIC_CONFIG.DOC_TYPES;
     switch(true) {
         case doc.type === PAGE:
             return `/${ doc.uid }`;
         case doc.type === PRODUCT:
             return `/product/${ doc.uid }`;
+        case doc.type === POST:
+            return `/post/${ doc.uid }`;
         // Add case for each page
         default:
             // Default to homepage
@@ -26,12 +29,14 @@ export const linkResolver = doc => {
 
 // Additional helper function for Next/Link component
 export const hrefResolver = doc => {
-    const { HOMEPAGE, PAGE, PRODUCT } = PRISMIC_CONFIG.DOC_TYPES;
+    const { HOMEPAGE, PAGE, PRODUCT, POST } = PRISMIC_CONFIG.DOC_TYPES;
     switch(true) {
         case doc.type === PAGE:
             return `/[uid]`;
         case doc.type === PRODUCT:
             return `/product/[slug]`;
+        case doc.type === POST:
+            return `/post/[slug]`;
         default:
             // Default to homepage
             return '/';

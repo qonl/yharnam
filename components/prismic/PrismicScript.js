@@ -11,7 +11,7 @@ const API_URL = PRISMIC_CONFIG.API_URL;
 const PrismicScript = () => {
     const [, repoName] = API_URL.match(/https?:\/\/([^.]+)?\.(cdn\.)?.+/);
 
-    return <script async defer src={`//static.cdn.prismic.io/prismic.js?repo=${ repoName }&new=true`} />;
+    return <script async defer src={ `//static.cdn.prismic.io/prismic.js?repo=${ repoName }&new=true` } />;
 }
 
 export default PrismicScript
