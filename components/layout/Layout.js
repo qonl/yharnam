@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import { LayoutContext } from '../../pages/_app';
+import SEO from '@components/SEO';
 
 /**
  * Wraps the page component with Global header and footer
@@ -20,6 +21,7 @@ const Layout = Component => {
         const { header, footer } = useContext(LayoutContext);
         return (
             <div className="layout">
+                { props?.page && <SEO data={ props.page } /> }
                 <Header data={ header } />
                 <main id="#main" className="page-wrapper">
                     <Component { ...props } />
