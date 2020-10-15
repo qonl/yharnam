@@ -1,12 +1,5 @@
 {
   "Main": {
-    "document_title": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
-        "label": "Document Title"
-      }
-    },
     "title": {
       "type": "StructuredText",
       "config": {
@@ -14,40 +7,18 @@
         "label": "Title"
       }
     },
-    "products": {
-      "type": "Group",
+    "date": {
+      "type": "Date",
       "config": {
-        "fields": {
-          "product": {
-            "type": "Link",
-            "config": {
-              "select": "document",
-              "customtypes": [
-                "product"
-              ],
-              "label": "Product"
-            }
-          }
-        },
-        "label": "Products"
+        "label": "Date"
       }
     },
-    "posts": {
-      "type": "Group",
+    "image": {
+      "type": "Image",
       "config": {
-        "fields": {
-          "post": {
-            "type": "Link",
-            "config": {
-              "select": "document",
-              "customtypes": [
-                "post"
-              ],
-              "label": "Post"
-            }
-          }
-        },
-        "label": "Posts"
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Image"
       }
     }
   },

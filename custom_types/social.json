@@ -1,0 +1,34 @@
+{
+  "Social": {
+    "social_title": {
+      "type": "Text",
+      "config": {
+        "label": "Social Title"
+      }
+    },
+    "social_description": {
+      "type": "Text",
+      "config": {
+        "label": "Social Description"
+      }
+    },
+    "social_image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Social Image"
+      }
+    },
+    "image_type": {
+      "type": "Select",
+      "config": {
+        "options": [
+          "image/jpeg",
+          "image/png"
+        ],
+        "label": "Image Type"
+      }
+    }
+  }
+}
