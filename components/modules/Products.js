@@ -1,22 +1,27 @@
 import React from 'react';
 import Link from 'next/link';
 import { hrefResolver, linkResolver } from '../../config/prismic';
+import { useAddItemToCart } from '../../context/StoreContext';
 
 const Products = ({ data }) => {
+    const addItemToCart = useAddItemToCart();
+
     return (
         <div className="products">
             <h2>Products</h2>
-            { data.map(item => {
-                const { data } = item;
+            { data.map(p => {
+                const { data: { item } } = p;
+
                 return (
-                    <div key={ data.item.id } className="product">
-                        <Link href={ hrefResolver(item) } as={ linkResolver(item) }>
-                            <a>
-                                <h1>{ data.item.title }</h1>
+                    <div key={ item.id } className="product">
+                        <Link href={ hrefResolver(p) } as={ linkResolver(p) }>
+                            <a className="product__link">
+                                <h1>{ item.title }</h1>
                             </a>
                         </Link>
-                        <img src={ data.item.image.src } alt={ data.item.image.alt } />
-                        <div dangerouslySetInnerHTML={{ __html: data.item.body_html }}></div>
+                        <img className="product__image" src={ item.image.src } alt={ item.image.alt } />
+                        <div className="product__price">{ `${ item.variants[0].price } blood echoes` }</div>
+                        <div className="product__desc" dangerouslySetInnerHTML={{ __html: item.body_html }}></div>
                     </div>
                 );
             })}
