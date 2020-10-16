@@ -9,9 +9,8 @@ const Posts = ({ data }) => {
             <h2>Posts</h2>
             { data.map(item => {
                 const { data } = item;
-
                 return (
-                    <div className="post">
+                    <div key={ item.id } className="post">
                         <Link href={ hrefResolver(item) } as={ linkResolver(item) }>
                             <a>
                                 <div dangerouslySetInnerHTML={{ __html: PrismicHTML(data.title) }}></div>
