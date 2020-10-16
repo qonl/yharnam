@@ -24,6 +24,8 @@ Set up your netlify environment variables (`.env.local` for development):
 ```bash
 NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN=
 NEXT_PUBLIC_PRISMIC_REPO=
+NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN=
+NEXT_PUBLIC_SHOPIFY_STORE_NAME=
 ```
 
 ## TODO
