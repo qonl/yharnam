@@ -1,7 +1,6 @@
 import React from 'react'
-import { getRepeatableDocuments } from '../lib/api';
+import { getPageData, getRepeatableDocuments } from '../lib/api';
 import { PRISMIC_CONFIG } from '../config/prismic';
-import { getBySlug } from '../lib/api';
 import withLayout from '@components/layout/Layout';
 
 const Page = ({ params: { slug } }) => <h1>This is a page template - { slug }</h1>;
@@ -11,12 +10,12 @@ export async function getStaticProps({ params, preview = null, previewData = {} 
         const { PAGE } = PRISMIC_CONFIG.DOC_TYPES;
         const { ref } = previewData;
         const { slug } = params;
-        const document = await getBySlug(PAGE, slug, ref);
+        const pageData = await getPageData(ref, PAGE, slug);
         return {
             props: {
                 params,
                 preview,
-                document,
+                pageData,
             }
         }
     } catch(error) {

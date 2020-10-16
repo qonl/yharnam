@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getBySlug, getRepeatableDocuments } from '../../lib/api';
+import { getPageData, getRepeatableDocuments } from '../../lib/api';
 import { PRISMIC_CONFIG } from '../../config/prismic';
 import { encode, decode } from 'shopify-gid';
 import withLayout from '@components/layout/Layout';
 import { useAddItemToCart } from '../../context/StoreContext';
 import { client } from '../../context/StoreContext';
 
-const Product = ({ product, preview }) => {
+const Product = ({ pageData: { page: product }, preview }) => {
     const addItemToCart = useAddItemToCart();
-    const { variants } = product.data.item;
     const form = useRef();
     const [check, setCheck] = useState(true);
     const [activeVariantId, setActiveVariantId] = useState('');
@@ -68,10 +67,10 @@ export async function getStaticProps({ params, preview = false, previewData = {}
         const { PRODUCT } = PRISMIC_CONFIG.DOC_TYPES;
         const { ref } = previewData;
         const { slug } = params;
-        const product = await getBySlug(PRODUCT, slug, ref);
+        const pageData = await getPageData(ref, PRODUCT, slug); // this isnt working
         return {
             props: {
-                product,
+                pageData,
                 preview,
             }
         }
