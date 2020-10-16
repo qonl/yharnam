@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import Header from './Header';
+import Header from './Header/Header';
 import Footer from './Footer';
-import { LayoutContext } from '../../pages/_app';
+import { LayoutContext } from '../../context/LayoutContext';
 import SEO from '@components/SEO';
 
 /**

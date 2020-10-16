@@ -2,17 +2,16 @@ import App from 'next/app'
 import React from 'react';
 import { getByType } from '../lib/api';
 import { PRISMIC_CONFIG } from '../config/prismic';
-
-// Create a context for the layout, as to not
-// fetch this information on every page change
-export const LayoutContext = React.createContext();
-const LayoutProvider = LayoutContext.Provider;
+import { LayoutContext } from '../context/LayoutContext';
+import { StoreContextProvider } from '../context/StoreContext';
 
 function MyApp({ Component, pageProps, header, footer }) {
     return (
-        <LayoutProvider value={{ header, footer }}>
-            <Component { ...pageProps } />
-        </LayoutProvider>
+        <LayoutContext.Provider value={{ header, footer }}>
+            <StoreContextProvider>
+                <Component { ...pageProps } />
+            </StoreContextProvider>
+        </LayoutContext.Provider>
     );
 }
 
