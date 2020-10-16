@@ -3,6 +3,7 @@ import Header from './Header/Header';
 import Footer from './Footer';
 import { LayoutContext } from '../../context/LayoutContext';
 import SEO from '@components/SEO';
+import {StoreContextProvider} from '../../context/StoreContext';
 
 /**
  * Wraps the page component with Global header and footer
@@ -18,18 +19,23 @@ const Layout = Component => {
      * @constructor
      */
     const Page = props => {
-        const { header, footer } = useContext(LayoutContext);
         return (
-            <div className="layout">
-                { props?.page && <SEO data={ props.page } /> }
-                <Header data={ header } />
-                <main id="#main" className="page-wrapper">
-                    <Component { ...props } />
-                </main>
-                <Footer data={ footer } />
-            </div>
+            <LayoutContext.Provider value={{ header: props?.header, footer: props?.footer }}>
+                <StoreContextProvider>
+                    <div className="layout">
+                        { props?.page && <SEO data={ props?.page } /> }
+                        <Header data={ props?.header } />
+                        <main id="#main" className="page-wrapper">
+                            <Component { ...props} />
+                        </main>
+                        <Footer data={ props?.footer } />
+                    </div>
+                </StoreContextProvider>
+            </LayoutContext.Provider>
         )
     }
+
+
 
     return Page;
 }

@@ -1,17 +1,17 @@
 import React from 'react';
 import { useGetPosts, useGetProducts } from '../actions';
 import { PRISMIC_CONFIG } from '../config/prismic';
-import { getAdditionalDocuments, getByType } from '../lib/api';
+import { getAdditionalDocuments, getPageData } from '../lib/api';
 import { prismicPageData } from '../util/prismicHelpers';
 import { RichText } from 'prismic-reactjs';
 import withLayout from '@components/layout/Layout';
 import Products from '@components/modules/Products';
 import Posts from '@components/modules/Posts';
 
-const Home = ({ products: initialProductsData, posts: initialPostsData, page }) => {
+const Home = ({ products: initialProductsData, posts: initialPostsData, pageData }) => {
     const { data: products } = useGetProducts(initialProductsData);
     const { data: posts } = useGetPosts(initialPostsData);
-    const data = prismicPageData(page);
+    const data = prismicPageData(pageData.page);
 
     return (
         <div className="home">
@@ -24,18 +24,19 @@ const Home = ({ products: initialProductsData, posts: initialPostsData, page }) 
     );
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ previewData = {} }) => {
     try {
+        const { ref } = previewData;
         const { HOMEPAGE, PRODUCT, POST } = PRISMIC_CONFIG.DOC_TYPES;
-        const page = await getByType(HOMEPAGE);
+        const pageData = await getPageData(ref, HOMEPAGE);
         const docs = await Promise.all([
-            getAdditionalDocuments(page[0]?.data?.products, PRODUCT),
-            getAdditionalDocuments(page[0]?.data?.posts, POST),
+            getAdditionalDocuments(pageData?.page[0]?.data?.products, PRODUCT),
+            getAdditionalDocuments(pageData?.page[0]?.data?.posts, POST),
         ]);
 
         return {
             props: {
-                page,
+                pageData,
                 products: docs[0], // Is there a better way?
                 posts: docs[1],
             },
