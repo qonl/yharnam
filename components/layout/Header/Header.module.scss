@@ -5,4 +5,8 @@ $c: '.header';
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &__cart-button {
+        background-color: red;
+    }
 }

@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Header from './Header/Header';
 import Footer from './Footer';
-import { LayoutContext } from '../../context/LayoutContext';
+import { LayoutContext } from '@context/LayoutContext';
 import SEO from '@components/SEO';
-import {StoreContextProvider} from '../../context/StoreContext';
+import { StoreContextProvider } from '@context/StoreContext';
+import Drawer from '@components/layout/Cart/Drawer/Drawer';
 
 /**
  * Wraps the page component with Global header and footer
@@ -25,6 +26,7 @@ const Layout = Component => {
                     <div className="layout">
                         { props?.page && <SEO data={ props?.page } /> }
                         <Header data={ props?.header } />
+                        <Drawer />
                         <main id="#main" className="page-wrapper">
                             <Component { ...props} />
                         </main>
@@ -34,8 +36,6 @@ const Layout = Component => {
             </LayoutContext.Provider>
         )
     }
-
-
 
     return Page;
 }
