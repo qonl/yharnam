@@ -1,16 +1,27 @@
 // Original File https://github.com/thetrevorharmon/sell-things-fast/blob/master/src/context/StoreContext.js
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Client from 'shopify-buy';
-import { SHOPIFY_CONFIG } from '../config/shopify';
+import { SHOPIFY_CONFIG } from '@config/shopify';
 
 const StoreContext = React.createContext();
+
+const IS_BROWSER = typeof window !== 'undefined';
+
+const SHOPIFY_CHECKOUT_STORAGE_KEY = 'shopify_checkout_id';
 
 export const client = Client.buildClient({
     storefrontAccessToken: SHOPIFY_CONFIG.ACCESS_TOKEN,
     domain: `${ SHOPIFY_CONFIG.STORE_NAME }.myshopify.com`,
-})
+});
 
-const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
+const setCheckoutInState = (checkout, setStore) => {
+    IS_BROWSER ? localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, checkout.id) : null;
+    setStore(prevState => ({ ...prevState, checkout }))
+}
+
+const createNewCheckout = store =>  store.client.checkout.create();
+
+const fetchCheckout = (store, id) => store.client.checkout.fetch(id);
 
 const StoreContextProvider = ({ children }) => {
     let initialStoreState = {
@@ -19,35 +30,18 @@ const StoreContextProvider = ({ children }) => {
         checkout: { lineItems: [] },
         products: [],
         shop: {},
+        cartOpen: false,
     }
 
-    const [store, setStore] = useState(initialStoreState)
+    const [store, setStore] = useState(initialStoreState);
 
     useEffect(() => {
         const initializeCheckout = async () => {
             // Check for an existing cart.
-            const isBrowser = typeof window !== "undefined"
+            const isBrowser = typeof window !== 'undefined';
             const existingCheckoutId = isBrowser
                 ? localStorage.getItem(SHOPIFY_CHECKOUT_STORAGE_KEY)
-                : null
-
-            function setCheckoutInState(checkout) {
-                if (isBrowser) {
-                    localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, checkout.id)
-                }
-
-                setStore(prevState => {
-                    return { ...prevState, checkout }
-                })
-            }
-
-            function createNewCheckout() {
-                return store.client.checkout.create()
-            }
-
-            function fetchCheckout(id) {
-                return store.client.checkout.fetch(id)
-            }
+                : null;
 
             if (existingCheckoutId) {
                 try {
@@ -57,13 +51,13 @@ const StoreContextProvider = ({ children }) => {
                         setCheckoutInState(checkout)
                         return
                     }
-                } catch (e) {
+                } catch(e) {
                     localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, null)
                 }
             }
 
-            const newCheckout = await createNewCheckout()
-            setCheckoutInState(newCheckout)
+            const newCheckout = await createNewCheckout(store);
+            setCheckoutInState(newCheckout, setStore);
         }
 
         initializeCheckout();
@@ -77,78 +71,63 @@ const StoreContextProvider = ({ children }) => {
 }
 
 function useStore() {
-    const { store } = useContext(StoreContext)
-    return store
+    const { store } = useContext(StoreContext);
+    return store;
 }
 
 function useCartCount() {
-    const {
-        store: { checkout },
-    } = useContext(StoreContext)
-
-    const count = checkout.lineItems.reduce(
-        (runningTotal, item) => item.quantity + runningTotal,
-        0
-    )
-
-    return count
+    const { store: { checkout } } = useContext(StoreContext);
+    return checkout.lineItems.reduce((runningTotal, item) => item.quantity + runningTotal, 0);
 }
 
 function useCartTotals() {
-    const {
-        store: { checkout },
-    } = useContext(StoreContext)
-
+    const { store: { checkout } } = useContext(StoreContext);
     const tax = checkout.totalTaxV2
-        ? `$${Number(checkout.totalTaxV2.amount).toFixed(2)}`
-        : "-"
-    const total = checkout.totalPriceV2
-        ? `$${Number(checkout.totalPriceV2.amount).toFixed(2)}`
-        : "-"
+        ? `$${ Number(checkout.totalTaxV2.amount).toFixed(2) }`
+        : "-";
 
-    return {
-        tax,
-        total,
-    }
+    const total = checkout.totalPriceV2
+        ? `$${ Number(checkout.totalPriceV2.amount).toFixed(2) }`
+        : "-";
+
+    return { tax, total };
 }
 
 function useCartItems() {
-    const {
-        store: { checkout },
-    } = useContext(StoreContext)
-
-    return checkout.lineItems
+    const { store: { checkout } } = useContext(StoreContext);
+    return checkout.lineItems;
 }
 
 function useAddItemToCart() {
-    const { store, setStore } = useContext(StoreContext)
+    const { store, setStore } = useContext(StoreContext);
 
-    async function addItemToCart(variantId, quantity) {
+    const addItemToCart = async (variantId, quantity) => {
         if (variantId === "" || !quantity) {
-            console.error("Both a size and quantity are required.")
-            return
+            console.error("Both a size and quantity are required.");
+            return;
         }
 
-        setStore(prevState => {
-            return { ...prevState, adding: true }
-        })
+        setStore(prevState => ({ ...prevState, adding: true }));
 
         const { checkout, client } = store;
 
-        const checkoutId = checkout.id
-        const lineItemsToUpdate = [{ variantId, quantity: parseInt(quantity, 10) }]
+        const checkoutId = checkout.id;
+        const lineItemsToUpdate = [{ variantId, quantity: parseInt(quantity, 10) }];
 
         const newCheckout = await client.checkout.addLineItems(
             checkoutId,
             lineItemsToUpdate
-        )
+        );
 
-        setStore(prevState => {
-            return { ...prevState, checkout: newCheckout, adding: false }
-        })
+        setStore(prevState => ({
+            ...prevState,
+            checkout: newCheckout,
+            adding: false,
+            cartIsOpen: true,
+        }));
     }
 
-    return addItemToCart
+    return addItemToCart;
 }
 
 function useRemoveItemFromCart() {
@@ -157,17 +136,12 @@ function useRemoveItemFromCart() {
         setStore,
     } = useContext(StoreContext)
 
-    async function removeItemFromCart(itemId) {
-        const newCheckout = await client.checkout.removeLineItems(checkout.id, [
-            itemId,
-        ])
-
-        setStore(prevState => {
-            return { ...prevState, checkout: newCheckout }
-        })
+    const removeItemFromCart = async itemId => {
+        const newCheckout = await client.checkout.removeLineItems(checkout.id, [itemId]);
+        setStore(prevState => ({ ...prevState, checkout: newCheckout }));
     }
 
-    return removeItemFromCart
+    return removeItemFromCart;
 }
 
 function useCheckout() {
@@ -180,6 +154,15 @@ function useCheckout() {
     }
 }
 
+function useToggleCart() {
+    const {
+        store: { cartOpen },
+        setStore
+    } = useContext(StoreContext);
+
+    return async () => setStore(prevState => ({...prevState, cartOpen: !cartOpen}));
+}
+
 export {
     StoreContextProvider,
     useAddItemToCart,
@@ -189,4 +172,5 @@ export {
     useCartTotals,
     useRemoveItemFromCart,
     useCheckout,
+    useToggleCart,
 }
