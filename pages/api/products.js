@@ -1,4 +1,4 @@
-import { getAllProducts } from '../../lib/api';
+import { getAllProducts } from '@lib/api';
 
 export default async function getProducts(req, res) {
     try {

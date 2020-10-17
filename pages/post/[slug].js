@@ -1,6 +1,6 @@
 import React from 'react';
-import { getBySlug, getRepeatableDocuments } from '../../lib/api';
-import { PRISMIC_CONFIG } from '../../config/prismic';
+import { getBySlug, getRepeatableDocuments } from '@lib/api';
+import { PRISMIC_CONFIG } from '@config/prismic';
 import withLayout from '@components/layout/Layout';
 
 const Post = ({ post, preview }) => (

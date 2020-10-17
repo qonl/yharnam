@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { hrefResolver, linkResolver } from '../../config/prismic';
-import { PrismicHTML } from '../../util/prismicHelpers';
+import { hrefResolver, linkResolver } from '@config/prismic';
+import { PrismicHTML } from '@util/prismicHelpers';
 
 const Posts = ({ data }) => {
     return (

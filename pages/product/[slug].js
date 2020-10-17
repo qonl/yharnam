@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getPageData, getRepeatableDocuments } from '../../lib/api';
-import { PRISMIC_CONFIG } from '../../config/prismic';
+import { getPageData, getRepeatableDocuments } from '@lib/api';
+import { PRISMIC_CONFIG } from '@config/prismic';
 import { encode, decode } from 'shopify-gid';
 import withLayout from '@components/layout/Layout';
-import { useAddItemToCart } from '../../context/StoreContext';
-import { client } from '../../context/StoreContext';
+import { useAddItemToCart } from '@context/StoreContext';
+import { client } from '@context/StoreContext';
 
 const Product = ({ pageData: { page: product }, preview }) => {
     const addItemToCart = useAddItemToCart();

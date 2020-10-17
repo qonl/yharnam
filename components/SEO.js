@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { linkResolver } from '../config/prismic';
+import { linkResolver } from '@config/prismic';
 import Head from 'next/head';
-import { PRISMIC_CONFIG } from '../config/prismic';
-import {prismicPageData} from '../util/prismicHelpers';
+import { PRISMIC_CONFIG } from '@config/prismic';
+import { prismicPageData } from '@util/prismicHelpers';
 
 /**
  * Renders SEO metadata

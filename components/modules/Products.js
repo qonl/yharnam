@@ -1,11 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { hrefResolver, linkResolver } from '../../config/prismic';
-import { useAddItemToCart } from '../../context/StoreContext';
+import { hrefResolver, linkResolver } from '@config/prismic';
 
 const Products = ({ data }) => {
-    const addItemToCart = useAddItemToCart();
-
     return (
         <div className="products">
             <h2>Products</h2>

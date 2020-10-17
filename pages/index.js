@@ -1,8 +1,8 @@
 import React from 'react';
 import { useGetPosts, useGetProducts } from '../actions';
-import { PRISMIC_CONFIG } from '../config/prismic';
-import { getAdditionalDocuments, getPageData } from '../lib/api';
-import { prismicPageData } from '../util/prismicHelpers';
+import { PRISMIC_CONFIG } from '@config/prismic';
+import { getAdditionalDocuments, getPageData } from '@lib/api';
+import { prismicPageData } from '@util/prismicHelpers';
 import { RichText } from 'prismic-reactjs';
 import withLayout from '@components/layout/Layout';
 import Products from '@components/modules/Products';

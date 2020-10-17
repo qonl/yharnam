@@ -1,5 +1,5 @@
 import React from 'react';
-import { PRISMIC_CONFIG } from '../../config/prismic';
+import { PRISMIC_CONFIG } from '@config/prismic';
 
 const API_URL = PRISMIC_CONFIG.API_URL;
 

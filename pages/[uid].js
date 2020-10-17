@@ -1,6 +1,6 @@
 import React from 'react'
-import { getPageData, getRepeatableDocuments } from '../lib/api';
-import { PRISMIC_CONFIG } from '../config/prismic';
+import { getPageData, getRepeatableDocuments } from '@lib/api';
+import { PRISMIC_CONFIG } from '@config/prismic';
 import withLayout from '@components/layout/Layout';
 
 const Page = ({ params: { slug } }) => <h1>This is a page template - { slug }</h1>;
