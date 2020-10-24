@@ -16,11 +16,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## DEPLOY
 
-This project is set up specifically to run on Netlify, so you need netlify cli tools
+This project is set up specifically to run on Vercel, so you need vercel cli
 
-`npm i netlify-cli --g`
+`npm i vercel -g`
 
-Set up your netlify environment variables (`.env.local` for development):
+Set up your vercel environment variables (`.env.local` for development):
 ```bash
 NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN=
 NEXT_PUBLIC_PRISMIC_REPO=

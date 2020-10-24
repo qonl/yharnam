@@ -3,7 +3,6 @@ import Header from './Header/Header';
 import Footer from './Footer';
 import { LayoutContext } from '@context/LayoutContext';
 import SEO from '@components/SEO';
-import { StoreContextProvider } from '@context/StoreContext';
 import Drawer from '@components/layout/Cart/Drawer/Drawer';
 
 /**
@@ -22,17 +21,15 @@ const Layout = Component => {
     const Page = props => {
         return (
             <LayoutContext.Provider value={{ header: props?.header, footer: props?.footer }}>
-                <StoreContextProvider>
-                    <div className="layout">
-                        { props?.page && <SEO data={ props?.page } /> }
-                        <Header data={ props?.header } />
-                        <Drawer />
-                        <main id="#main" className="page-wrapper">
-                            <Component { ...props} />
-                        </main>
-                        <Footer data={ props?.footer } />
-                    </div>
-                </StoreContextProvider>
+                <div className="layout">
+                    { props?.page && <SEO data={ props?.page } /> }
+                    <Header data={ props?.header } />
+                    <Drawer />
+                    <main id="#main" className="page-wrapper">
+                        <Component { ...props} />
+                    </main>
+                    <Footer data={ props?.footer } />
+                </div>
             </LayoutContext.Provider>
         )
     }
