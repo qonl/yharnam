@@ -17,9 +17,9 @@ export const linkResolver = doc => {
         case doc.type === PAGE:
             return `/${ doc.uid }`;
         case doc.type === PRODUCT:
-            return `/product/${ doc.uid }`;
+            return `/products/${ doc.uid }`;
         case doc.type === POST:
-            return `/post/${ doc.uid }`;
+            return `/posts/${ doc.uid }`;
         // Add case for each page
         default:
             // Default to homepage
@@ -34,9 +34,9 @@ export const hrefResolver = doc => {
         case doc.type === PAGE:
             return `/[uid]`;
         case doc.type === PRODUCT:
-            return `/product/[slug]`;
+            return `/products/[slug]`;
         case doc.type === POST:
-            return `/post/[slug]`;
+            return `/posts/[slug]`;
         default:
             // Default to homepage
             return '/';
