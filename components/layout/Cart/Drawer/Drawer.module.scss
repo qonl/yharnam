@@ -1,6 +1,15 @@
 $c: '.drawer';
+$open: '.is-open';
 
 #{$c} {
+    background-color: white;
     width: 100%;
     max-width: 375px;
+    position: absolute;
+    right: -375px;
+    transition: right .5s ease-in-out;
+}
+
+#{$open}{
+    right: 0;
 }

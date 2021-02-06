@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './Drawer.module.scss';
 import Cart from '../Cart';
-import { useStore, useToggleCart } from '@context/StoreContext';
+import { useStore, useToggleCart, useCartTotals, useCartItems, useCheckout } from '@context/StoreContext';
+import Link from 'next';
 import cx from 'classnames';
 
 const Drawer = () => {
+    const lineItems = useCartItems()
     const { cartOpen } = useStore();
     const toggleCart = useToggleCart();
+    const openCheckout = useCheckout();
+    const { total } = useCartTotals();
+
+    const [style, setStyle] = useState(cartOpen ? styles['drawer'] : styles['is-open']);
 
     const trap = cartOpen ? (
         <div className={ styles['drawer__inner'] }>
@@ -20,11 +26,28 @@ const Drawer = () => {
                 </button>
             </div>
             <Cart/>
+            { lineItems.length < 1 ? (
+                <Link
+                    onClick={ () => {
+                        toggleCart();
+                    } }
+                    href='/'
+                >
+                    Continue Shopping
+                </Link>
+            ) : (
+                <button
+                    onClick={ openCheckout }
+                    type='submit'
+                >
+                    <span>Checkout</span>
+                </button>
+            ) }
         </div>
     ) : false;
 
     return (
-        <div className={ cx( styles['drawer'], cartOpen ? 'is-open' : '') }>
+        <div className={ cx(styles['drawer'], cartOpen ? styles['is-open'] : null) }>
             { trap }
         </div>
     );

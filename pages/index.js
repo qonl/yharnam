@@ -40,6 +40,10 @@ export const getStaticProps = async ({ previewData = {} }) => {
                 products: docs[0], // Is there a better way?
                 posts: docs[1],
             },
+            // Next.js will attempt to re-generate the page:
+            // - When a request comes in
+            // - At most once every second
+            revalidate: 1,
         }
     } catch(error) {
         throw new Error(error);

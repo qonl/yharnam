@@ -12,9 +12,9 @@ const Cart = () => {
     return (
         <div className={ styles.cart }>
             { lineItems.length > 0 ? <div>
-                {lineItems.map(item => <LineItem
-                    key={item.id + item.quantity}
-                    {...item}
+                { lineItems.map(item => <LineItem
+                    key={ item.id + item.quantity }
+                    { ...item }
                 />)}
             </div> : <>Cart is empty</>}
 

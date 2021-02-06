@@ -11,7 +11,7 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head />
-                <body>
+                <body style={{ overflow: 'hidden' }}>
                     <Main />
                     <NextScript />
                     <PrismicScript />
