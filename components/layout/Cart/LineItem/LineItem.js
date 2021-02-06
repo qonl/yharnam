@@ -53,13 +53,7 @@ const LineItem = ({
                                     >
                                         -
                                     </button>
-                                    <span
-                                        name="quantity"
-                                        min="1"
-                                        type="number"
-                                    >
-                                        { stateQuantity }
-                                    </span>
+                                    <span>{ stateQuantity }</span>
                                     <button
                                         aria-label='increase quantity'
                                         onClick={ () => updateQuantity(stateQuantity + 1) }
