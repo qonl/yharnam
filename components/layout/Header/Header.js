@@ -8,8 +8,12 @@ const Header = () => {
     const toggleCart = useToggleCart();
 
     return (
-        <div className={ styles['header']}>
-            <Link href="/"><a><h1 className="title">Home</h1></a></Link>
+        <div className={ styles['header'] }>
+            <Link href="/">
+                <a>
+                    <h1 className="title">Home</h1>
+                </a>
+            </Link>
             <button
                 onClick={ () => toggleCart() }
                 className={ styles['header__cart-button'] }

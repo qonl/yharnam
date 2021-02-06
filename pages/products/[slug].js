@@ -67,7 +67,7 @@ export async function getStaticProps({ params, preview = false, previewData = {}
         const { PRODUCT } = PRISMIC_CONFIG.DOC_TYPES;
         const { ref } = previewData;
         const { slug } = params;
-        const pageData = await getPageData(ref, PRODUCT, slug); // this isnt working
+        const pageData = await getPageData(ref, PRODUCT, slug);
         return {
             props: {
                 pageData,

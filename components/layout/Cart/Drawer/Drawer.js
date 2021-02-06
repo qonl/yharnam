@@ -5,14 +5,16 @@ import { useStore, useToggleCart } from '@context/StoreContext';
 import cx from 'classnames';
 
 const Drawer = () => {
-    const { cartOpen } = useStore()
-    const toggleCart = useToggleCart()
+    const { cartOpen } = useStore();
+    const toggleCart = useToggleCart();
+
     const trap = cartOpen ? (
         <div className={ styles['drawer__inner'] }>
             <div className={ styles['drawer__header'] }>
                 <h4>Your Cart</h4>
-                <button className={ styles['drawer__close'] }
-                        onClick={ () => toggleCart() }
+                <button
+                    className={ styles['drawer__close'] }
+                    onClick={ () => toggleCart() }
                 >
                     close
                 </button>
