@@ -1,6 +1,6 @@
 @import '../../../styles/variables';
 
-$c: '.header';
+$c: '.footer';
 
 #{$c} {
     width: 100%;
@@ -8,9 +8,6 @@ $c: '.header';
     justify-content: center;
 
     &__wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         width: 100%;
         max-width: calc(100% - 3rem);
 
@@ -25,9 +22,5 @@ $c: '.header';
         @include bp(xxlarge) {
             max-width: 72rem;
         }
-    }
-
-    &__cart-button {
-        background-color: red;
     }
 }

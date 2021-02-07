@@ -10,8 +10,8 @@ class MyDocument extends Document {
     render() {
         return (
             <Html>
-                <Head />
-                <body style={{ overflow: 'hidden' }}>
+                <Head ><title>Yharnam</title></Head>
+                <body>
                     <Main />
                     <NextScript />
                     <PrismicScript />

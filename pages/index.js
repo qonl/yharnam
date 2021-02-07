@@ -5,8 +5,8 @@ import { getAdditionalDocuments, getPageData } from '@lib/api';
 import { prismicPageData } from '@util/prismicHelpers';
 import { RichText } from 'prismic-reactjs';
 import withLayout from '@components/layout/Layout';
-import Products from '@components/modules/Products';
-import Posts from '@components/modules/Posts';
+import Products from '@components/modules/Products/Products';
+import Posts from '@components/modules/Posts/Posts';
 
 const Home = ({ products: initialProductsData, posts: initialPostsData, pageData }) => {
     const { data: products } = useGetProducts(initialProductsData);

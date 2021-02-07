@@ -5,59 +5,13 @@ import { encode, decode } from 'shopify-gid';
 import withLayout from '@components/layout/Layout';
 import { useAddItemToCart } from '@context/StoreContext';
 import { client } from '@context/StoreContext';
+import ProductContent from '../../components/modules/Products/Product/Product';
 
 const Product = ({ pageData: { page: product }, preview }) => {
-    const addItemToCart = useAddItemToCart();
-    const form = useRef();
-    const [check, setCheck] = useState(true);
-    const [activeVariantId, setActiveVariantId] = useState('');
-    const [available, setAvailable] = useState(false);
-    const [adding, setAdding] = useState(false);
-
-    useEffect(() => {
-        if (check) {
-            const shopifyId = encode('Product', product.data.item.id, {
-                accessToken: process.env.NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN,
-            });
-
-            client.product.fetch(shopifyId).then(product => {
-                const decodedVariants = [];
-                product.variants.forEach(variant => {
-                    decodedVariants.push({
-                        ...variant,
-                        cleanId: parseInt(decode(variant.id).id, 0),
-                    });
-                });
-                setActiveVariantId(decodedVariants[0].id);
-                setAvailable(decodedVariants[0].available);
-
-                setCheck(false);
-            })
-        }
-    }, [check]);
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        e.stopPropagation();
-        setAdding(true);
-        if (available) {
-            addItemToCart(activeVariantId, 1).then(() => {
-                setAdding(false)
-            })
-        }
-    }
-
     return (
         <>
             { preview && <div>You're previewing</div> }
-            <div className="product">
-                <h1>This is a product template - { product?.uid }</h1>
-                <form onSubmit={ e => handleSubmit(e) } ref={ form }>
-                    <button className="product__add-to-cart" type="submit">
-                        <span>{ adding ? 'Adding' : 'Add to Cart' }</span>
-                    </button>
-                </form>
-            </div>
+            <ProductContent product={ product } />
         </>
     );
 }

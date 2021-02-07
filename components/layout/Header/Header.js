@@ -9,17 +9,19 @@ const Header = () => {
 
     return (
         <div className={ styles['header'] }>
-            <Link href="/">
-                <a>
-                    <h1 className="title">Home</h1>
-                </a>
-            </Link>
-            <button
-                onClick={ () => toggleCart() }
-                className={ styles['header__cart-button'] }
-            >
-                Cart count: <span className="header__cart-count">{ cartCount }</span>
-            </button>
+            <div className={ styles['header__wrapper'] }>
+                <Link href="/">
+                    <a>
+                        <h1 className="title">Home</h1>
+                    </a>
+                </Link>
+                <button
+                    onClick={ () => toggleCart() }
+                    className={ styles['header__cart-button'] }
+                >
+                    Cart count: <span className="header__cart-count">{ cartCount }</span>
+                </button>
+            </div>
         </div>
     );
 }

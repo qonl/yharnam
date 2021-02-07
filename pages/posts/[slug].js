@@ -2,15 +2,13 @@ import React from 'react';
 import { getBySlug, getRepeatableDocuments } from '@lib/api';
 import { PRISMIC_CONFIG } from '@config/prismic';
 import withLayout from '@components/layout/Layout';
+import PostContent from '@components/modules/Posts/Post/Post';
 
-const Post = ({ post, preview }) => (
-    <>
-        { preview && <div>You're previewing</div> }
-        <div className="post">
-            <h1>This is a post template - { post?.uid }</h1>
-        </div>
-    </>
-);
+const Post = ({ post, preview }) => {
+    return (
+        <PostContent post={ post } preview={ preview } />
+    );
+}
 
 export async function getStaticProps({ params, preview = false, previewData = {} }) {
     try {

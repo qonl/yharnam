@@ -1,0 +1,30 @@
+@import '../../../styles/variables';
+
+$c: '.posts';
+
+#{$c} {
+    width: 100%;
+
+    &__wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__post-card {
+        width: 100%;
+
+        @include bp(large) {
+            max-width: 33%;
+            margin-right: 1.5rem;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+}

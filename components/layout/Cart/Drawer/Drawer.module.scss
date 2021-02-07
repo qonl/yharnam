@@ -2,12 +2,18 @@ $c: '.drawer';
 $open: '.is-open';
 
 #{$c} {
-    background-color: white;
+    background-color: #f5f5f5;
     width: 100%;
     max-width: 375px;
-    position: absolute;
+    position: fixed;
+    top: 0;
     right: -375px;
     transition: right .5s ease-in-out;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 #{$open}{
