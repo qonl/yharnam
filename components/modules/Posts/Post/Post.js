@@ -10,7 +10,7 @@ const Post = ({ post, preview }) => {
             <RichText render={ data.title } />
             <p>{ data.meta_description }</p>
             <img src={ data.image.url } alt={ data.image.alt } />
-            <RichText className={ styles['post'] } render={ data.content }></RichText>
+            <RichText render={ data.content }></RichText>
         </div>
     </>)
 }

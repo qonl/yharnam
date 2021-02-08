@@ -9,16 +9,26 @@ const Posts = ({ data }) => {
         <div className={ styles['posts'] }>
             <h2>Posts</h2>
             <div className={ styles['posts__wrapper'] }>
-                { data.map(item => {
-                    const { data } = item;
+                { data.items.map(item => {
+                    const {
+                        post: {
+                            data: {
+                                title,
+                                image,
+                                date,
+                            }
+                        }
+                    } = item;
+
                     return (
-                        <div key={ item.id } className={ styles['posts__post-card'] }>
-                            <Link href={ hrefResolver(item) } as={ linkResolver(item) }>
+                        <div key={ item.post.uid } className={ styles['posts__post-card'] }>
+                            <Link href={ hrefResolver(item.post) } as={ linkResolver(item.post) }>
                                 <a>
-                                    <RichText render={ data.title } />
+                                    <RichText render={ title } />
                                 </a>
                             </Link>
-                            <img src={ data.image.url } alt={ data.image.alt } />
+                            <span>{ date }</span>
+                            <img src={ image.url } alt={ image.alt } />
                         </div>
                     );
                 })}

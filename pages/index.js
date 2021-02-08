@@ -1,16 +1,12 @@
 import React from 'react';
-import { useGetPosts, useGetProducts } from '../actions';
 import { PRISMIC_CONFIG } from '@config/prismic';
-import { getAdditionalDocuments, getPageData } from '@lib/api';
+import { getPageData } from '@lib/api';
 import { prismicPageData } from '@util/prismicHelpers';
 import { RichText } from 'prismic-reactjs';
 import withLayout from '@components/layout/Layout';
-import Products from '@components/modules/Products/Products';
-import Posts from '@components/modules/Posts/Posts';
+import { Module } from '@components/modules';
 
-const Home = ({ products: initialProductsData, posts: initialPostsData, pageData }) => {
-    const { data: products } = useGetProducts(initialProductsData);
-    const { data: posts } = useGetPosts(initialPostsData);
+const Home = ({ pageData }) => {
     const data = prismicPageData(pageData.page);
 
     return (
@@ -18,8 +14,7 @@ const Home = ({ products: initialProductsData, posts: initialPostsData, pageData
             <div className="home__page-title">
                 <RichText render={ data.title } />
             </div>
-            <Products data={ products } />
-            <Posts data={ posts } />
+            { data.body.map((module, key) => <Module key={ key } module={ module } />) }
         </div>
     );
 }
@@ -27,18 +22,12 @@ const Home = ({ products: initialProductsData, posts: initialPostsData, pageData
 export const getStaticProps = async ({ previewData = {} }) => {
     try {
         const { ref } = previewData;
-        const { HOMEPAGE, PRODUCT, POST } = PRISMIC_CONFIG.DOC_TYPES;
+        const { HOMEPAGE } = PRISMIC_CONFIG.DOC_TYPES;
         const pageData = await getPageData(ref, HOMEPAGE);
-        const docs = await Promise.all([
-            getAdditionalDocuments(pageData?.page[0]?.data?.products, PRODUCT),
-            getAdditionalDocuments(pageData?.page[0]?.data?.posts, POST),
-        ]);
 
         return {
             props: {
                 pageData,
-                products: docs[0], // Is there a better way?
-                posts: docs[1],
             },
             // Next.js will attempt to re-generate the page:
             // - When a request comes in

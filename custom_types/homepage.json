@@ -1,105 +1,128 @@
 {
-  "Main": {
-    "document_title": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
-        "label": "Document Title"
+  "Main" : {
+    "document_title" : {
+      "type" : "StructuredText",
+      "config" : {
+        "single" : "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label" : "Document Title"
       }
     },
-    "title": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
-        "label": "Title"
+    "title" : {
+      "type" : "StructuredText",
+      "config" : {
+        "single" : "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label" : "Title"
       }
     },
-    "products": {
-      "type": "Group",
-      "config": {
-        "fields": {
-          "product": {
-            "type": "Link",
-            "config": {
-              "select": "document",
-              "customtypes": [
-                "product"
-              ],
-              "label": "Product"
+    "body" : {
+      "type" : "Slices",
+      "fieldset" : "Slice zone",
+      "config" : {
+        "labels" : {
+          "products" : [ ],
+          "posts" : [ ]
+        },
+        "choices" : {
+          "products" : {
+            "type" : "Slice",
+            "fieldset" : "Products",
+            "description" : "Displays a selection of products",
+            "icon" : "attach_money",
+            "display" : "grid",
+            "non-repeat" : {
+              "products_title" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "single" : "heading3, heading4",
+                  "label" : "Products Title"
+                }
+              }
+            },
+            "repeat" : {
+              "product" : {
+                "type" : "Link",
+                "config" : {
+                  "select" : "document",
+                  "label" : "Product"
+                }
+              }
+            }
+          },
+          "posts" : {
+            "type" : "Slice",
+            "fieldset" : "Posts",
+            "description" : "Displays a selecion of posts",
+            "icon" : "border_color",
+            "display" : "grid",
+            "non-repeat" : {
+              "posts_title" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "single" : "heading3, heading4",
+                  "label" : "Posts Title"
+                }
+              }
+            },
+            "repeat" : {
+              "post" : {
+                "type" : "Link",
+                "config" : {
+                  "select" : "document",
+                  "label" : "Post"
+                }
+              }
             }
           }
-        },
-        "label": "Products"
-      }
-    },
-    "posts": {
-      "type": "Group",
-      "config": {
-        "fields": {
-          "post": {
-            "type": "Link",
-            "config": {
-              "select": "document",
-              "customtypes": [
-                "post"
-              ],
-              "label": "Post"
-            }
-          }
-        },
-        "label": "Posts"
+        }
       }
     }
   },
-  "SEO": {
-    "uid": {
-      "type": "UID",
-      "config": {
-        "label": "Slug"
+  "SEO" : {
+    "uid" : {
+      "type" : "UID",
+      "config" : {
+        "label" : "Slug"
       }
     },
-    "meta_title": {
-      "type": "Text",
-      "config": {
-        "label": "Meta Title"
+    "meta_title" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Meta Title"
       }
     },
-    "meta_description": {
-      "type": "Text",
-      "config": {
-        "label": "Meta Description"
+    "meta_description" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Meta Description"
       }
     }
   },
-  "Social": {
-    "social_title": {
-      "type": "Text",
-      "config": {
-        "label": "Social Title"
+  "Social" : {
+    "social_title" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Social Title"
       }
     },
-    "social_description": {
-      "type": "Text",
-      "config": {
-        "label": "Social Description"
+    "social_description" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Social Description"
       }
     },
-    "social_image": {
-      "type": "Image",
-      "config": {
-        "constraint": {},
-        "thumbnails": [],
-        "label": "Social Image"
+    "social_image" : {
+      "type" : "Image",
+      "config" : {
+        "constraint" : { },
+        "thumbnails" : [ ],
+        "label" : "Social Image"
       }
     },
-    "image_type": {
-      "type": "Select",
-      "config": {
-        "options": [
-          "image/jpeg",
-          "image/png"
-        ],
-        "label": "Image Type"
+    "image_type" : {
+      "type" : "Select",
+      "config" : {
+        "options" : [ "image/jpeg", "image/png" ],
+        "label" : "Image Type"
       }
     }
   }

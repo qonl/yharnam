@@ -8,14 +8,20 @@ const Products = ({ data }) => {
         <div className={ styles['products'] }>
             <h2>Products</h2>
             <div className={ styles['products__wrapper'] }>
-                { data.map(p => {
-                    const { data: { item } } = p;
+                { data.items.map(p => {
+                    const {
+                        product: {
+                            data: {
+                                item
+                            }
+                        }
+                    } = p;
 
                     return (
                         <div key={ item.id } className={ styles['products__product-card'] }>
                             <Link
-                                href={ hrefResolver(p) }
-                                as={ linkResolver(p) }
+                                href={ hrefResolver(p.product) }
+                                as={ linkResolver(p.product) }
                             >
                                 <a className="product__link">
                                     <h1>{ item.title }</h1>

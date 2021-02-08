@@ -10,7 +10,7 @@ class MyDocument extends Document {
     render() {
         return (
             <Html>
-                <Head ><title>Yharnam</title></Head>
+                <Head></Head>
                 <body>
                     <Main />
                     <NextScript />

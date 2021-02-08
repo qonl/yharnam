@@ -1,5 +1,5 @@
 import Link from 'next';
-import { hrefResolver, linkResolver } from '../config/prismic';
+import { hrefResolver, linkResolver } from '@config/prismic';
 import PrismicDOM from 'prismic-dom';
 
 // Helper function to convert Prismic Rich Text links to Next/Link components
@@ -30,3 +30,12 @@ export const prismicPageData = pageData => {
         return pageData.data
     }
 }
+
+/**
+ * Prismic doesn't always name the slice property consistently.
+ * This attempts to safely access the right slice body.
+ *
+ * @param data
+ * @returns {*}
+ */
+export const prismicSliceData = data => data.body1 || data.body;
