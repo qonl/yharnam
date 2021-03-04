@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 import Link from 'next/link';
 import { useCartCount, useToggleCart } from '@context/StoreContext';
 
-const Header = () => {
+const Header = ({ data: headerData }) => {
     const cartCount = useCartCount();
     const toggleCart = useToggleCart();
 

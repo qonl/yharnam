@@ -1,0 +1,59 @@
+{
+  "Header" : {
+    "document_title" : {
+      "type" : "StructuredText",
+      "config" : {
+        "single" : "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label" : "Document Title"
+      }
+    },
+    "navigation" : {
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "link" : {
+            "type" : "Link",
+            "config" : {
+              "allowTargetBlank" : true,
+              "label" : "Link"
+            }
+          }
+        },
+        "label" : "Navigation"
+      }
+    }
+  },
+  "Footer" : {
+    "title" : {
+      "type" : "StructuredText",
+      "config" : {
+        "single" : "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label" : "Title"
+      }
+    },
+    "mailchimp_url" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Mailchimp Url"
+      }
+    },
+    "submit_text" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Submit Text"
+      }
+    },
+    "success_message" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Success Message"
+      }
+    },
+    "error_message" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Error Message"
+      }
+    }
+  }
+}

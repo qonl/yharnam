@@ -3,13 +3,16 @@ import Link from 'next/link';
 import { hrefResolver, linkResolver } from '@config/prismic';
 import { RichText } from 'prismic-reactjs';
 import styles from './Posts.module.scss';
+import { useGetPosts } from '@actions/index';
 
-const Posts = ({ data }) => {
+const Posts = ({ data: postsData }) => {
+    const { data } = useGetPosts(postsData);
+
     return (
         <div className={ styles['posts'] }>
             <h2>Posts</h2>
             <div className={ styles['posts__wrapper'] }>
-                { data.items.map(item => {
+                { data?.items.map(item => {
                     const {
                         post: {
                             data: {
@@ -19,6 +22,7 @@ const Posts = ({ data }) => {
                             }
                         }
                     } = item;
+
 
                     return (
                         <div key={ item.post.uid } className={ styles['posts__post-card'] }>

@@ -17,18 +17,18 @@ const Layout = Component => {
         return (
             <LayoutContext.Provider
                 value={{
-                    header: props?.header,
-                    footer: props?.footer
+                    header: props?.layout?.header,
+                    footer: props?.layout?.footer,
                 }}
             >
                 <div className={ styles['layout'] }>
                     { props?.page && <SEO data={ props?.page }/>}
-                    <Header data={ props?.header } />
+                    <Header data={ props?.layout?.header } />
                     <Drawer />
                     <main id="#main" className={ styles['page-wrapper'] }>
                         <Component { ...props } />
                     </main>
-                    <Footer data={ props?.footer } />
+                    <Footer data={ props?.layout?.footer } />
                 </div>
             </LayoutContext.Provider>
         )

@@ -2,8 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import { hrefResolver, linkResolver } from '@config/prismic';
 import styles from './Products.module.scss';
+import { useGetProducts } from '@actions/index';
 
-const Products = ({ data }) => {
+const Products = ({ data: productsData }) => {
+    const { data } = useGetProducts(productsData);
+
     return (
         <div className={ styles['products'] }>
             <h2>Products</h2>

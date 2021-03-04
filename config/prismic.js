@@ -8,8 +8,7 @@ export const PRISMIC_CONFIG = {
         HOMEPAGE: 'homepage',
         PAGE: 'page',
         PRODUCT: 'product',
-        HEADER: 'header',
-        FOOTER: 'footer',
+        LAYOUT: 'layout',
         POST: 'post',
     },
     SLICE_TYPES: {
