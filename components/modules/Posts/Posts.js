@@ -3,11 +3,8 @@ import Link from 'next/link';
 import { hrefResolver, linkResolver } from '@config/prismic';
 import { RichText } from 'prismic-reactjs';
 import styles from './Posts.module.scss';
-import { useGetPosts } from '@actions/index';
 
-const Posts = ({ data: postsData }) => {
-    const { data } = useGetPosts(postsData);
-
+const Posts = ({ data }) => {
     return (
         <div className={ styles['posts'] }>
             <h2>Posts</h2>
@@ -25,20 +22,20 @@ const Posts = ({ data: postsData }) => {
 
 
                     return (
-                        <div key={ item.post.uid } className={ styles['posts__post-card'] }>
-                            <Link href={ hrefResolver(item.post) } as={ linkResolver(item.post) }>
+                        <div key={ title } className={ styles['posts__post-card'] }>
+                            <Link href={ hrefResolver(item?.post) } as={ linkResolver(item?.post) }>
                                 <a>
                                     <RichText render={ title } />
                                 </a>
                             </Link>
                             <span>{ date }</span>
-                            <img src={ image.url } alt={ image.alt } />
+                            <img src={ image?.url } alt={ image?.alt } />
                         </div>
                     );
                 })}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Posts;
