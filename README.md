@@ -27,8 +27,3 @@ NEXT_PUBLIC_PRISMIC_REPO=
 NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN=
 NEXT_PUBLIC_SHOPIFY_STORE_NAME=
 ```
-
-## TODO
-- add more shopify stuff
-- add mailchimp
-- find a better way to use useSWR (/actions)
