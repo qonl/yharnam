@@ -1,8 +1,5 @@
 # Yharnam
 
-
-
-
 🌘  This is a Nextjs v9.5.4 starter project with Prismic & Shopify (enabled via Prismic integration fields). Note this is just a POC of product, blogging, and cart functionality and should be adapted to your own needs.
 
 ## Getting Started
